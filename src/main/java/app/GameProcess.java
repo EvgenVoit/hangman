@@ -1,9 +1,6 @@
 package app;
 
-import utils.Constants;
-import utils.GallowDraw;
-import utils.Language;
-import utils.WordReader;
+import utils.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,6 +10,7 @@ public class GameProcess implements Showable {
     private static int errorCounter;
     private static String resultStr;
     private final List<Character> inputLetters = new ArrayList<>();
+
     @Override
     public void showTheWord(Enum<Language> languageEnum) {
         try {
@@ -31,7 +29,12 @@ public class GameProcess implements Showable {
             while (isEnded) {
                 System.out.println("---------------------");
                 System.out.println("Enter the letter: ");
-                char letter = Constants.SCANNER.next().charAt(0);
+                char letter = Character.toLowerCase(Constants.SCANNER.next().charAt(0));
+                if (String.valueOf(languageEnum).equals("RUSSIAN")) {
+                    InputCheck.validateInputRussian(String.valueOf(letter));
+                } else if (String.valueOf(languageEnum).equals("ENGLISH")) {
+                    InputCheck.validateInputEnglish(String.valueOf(letter));
+                }
                 System.out.println("Char: " + letter);
                 if (!word.contains(String.valueOf(letter)) && !inputLetters.contains(letter)) {
                     inputLetters.add(letter);
@@ -56,6 +59,8 @@ public class GameProcess implements Showable {
                                 Constants.ANSI_RESET + " " + Constants.WINNER);
                         System.out.println("----------------------------------------------------");
                         inputLetters.clear();
+                        errorCounter = 0;
+                        resultStr = null;
                     }
                 } else {
                     System.out.println(Constants.ANSI_RED + "Errors " + "(" + errorCounter + "): " +
@@ -72,11 +77,14 @@ public class GameProcess implements Showable {
                         System.out.println("----------------------------------------------------");
                         inputLetters.clear();
                         errorCounter = 0;
+                        resultStr = null;
                     }
                 }
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
+        } catch (InvalidInputException e) {
+            System.out.println(e.getMessage());
         }
     }
 }
