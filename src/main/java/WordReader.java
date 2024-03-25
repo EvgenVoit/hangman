@@ -5,9 +5,35 @@ import java.util.List;
 import java.util.Random;
 
 public class WordReader {
-    public static String getWord() throws IOException {
-        List<String> wordArchive = Files.readAllLines(Path.of("src/main/resources/word.txt"));
-        return wordArchive.get(new Random().nextInt(wordArchive.size()));
-    }
+    private static final String russianWordPath = "src/main/resources/RussianWord.txt";
+    private static final String englishWordPath = "src/main/resources/EnglishWord.txt";
 
+    public static String getWord(Enum<Language> languageEnum) throws IOException {
+        switch (languageEnum.name()) {
+
+            case "RUSSIAN" -> {
+                List<String> wordList = Files.readAllLines(Path.of(russianWordPath));
+                return wordList.get(new Random().nextInt(wordList.size()));
+            }
+
+            case "ENGLISH" -> {
+                List<String> wordList = Files.readAllLines(Path.of(englishWordPath));
+                return wordList.get(new Random().nextInt(wordList.size()));
+            }
+
+            default -> {
+                return "INPUT ERROR!";
+            }
+        }
+    }
 }
+
+
+//        if (languageEnum == Language.RUSSIAN) {
+//            List<String> wordList = Files.readAllLines(Path.of(russianWordPath));
+//            return wordList.get(new Random().nextInt(wordList.size()));
+//        }
+//        if (languageEnum == Language.RUSSIAN){
+//            List<String> wordList = Files.readAllLines(Path.of(englishWordPath));
+//            return wordList.get(new Random().nextInt(wordList.size()));
+//        }
