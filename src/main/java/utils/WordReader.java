@@ -1,3 +1,5 @@
+package utils;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -27,13 +29,3 @@ public class WordReader {
         }
     }
 }
-
-
-//        if (languageEnum == Language.RUSSIAN) {
-//            List<String> wordList = Files.readAllLines(Path.of(russianWordPath));
-//            return wordList.get(new Random().nextInt(wordList.size()));
-//        }
-//        if (languageEnum == Language.RUSSIAN){
-//            List<String> wordList = Files.readAllLines(Path.of(englishWordPath));
-//            return wordList.get(new Random().nextInt(wordList.size()));
-//        }
