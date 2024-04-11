@@ -1,8 +1,17 @@
 package utils;
 
-public class GallowDraw {
-    public static void drawGallow(int counter) {
+public class GallowsDraw {
+    public static void drawGallows(int counter) {
         switch (counter) {
+            case 0 -> {
+                System.out.println("  _______");
+                System.out.println("  |     |");
+                System.out.println("  |      ");
+                System.out.println("  |");
+                System.out.println("  |");
+                System.out.println("  |");
+                System.out.println("__|__");
+            }
             case 1 -> {
                 System.out.println("  _______");
                 System.out.println("  |     |");
